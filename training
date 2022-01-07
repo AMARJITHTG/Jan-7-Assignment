@@ -1,0 +1,1047 @@
+ubuntu@ip-172-31-42-121:~$ ls
+ABC       allperm   d                impex           kevin                  perm1          start-tomcat
+ABCimpex  args.sh   galaxyinfor.txt  initialgalaxy   kevin.txt              perm2          temp
+a         b         getting-started  input.sh        kevin_orchestrate.yml  perm3          amar
+abc.sh    bootcamp  hifly            install-tomcat  kevin_playbook         prime.sh
+abc.yml   c         ifelse.sh        jon             main.yml               prime.sh.save
+ubuntu@ip-172-31-42-161:~$ cd getting-started/
+ubuntu@ip-172-31-42-161:~/getting-started$ cd app
+ubuntu@ip-172-31-42-161:~/getting-started/app$ docker run -d ubuntu bash -c "shuf -i 1-10000 -n 1 -o /data.txt && tail -f /dev/null"
+docker: Got permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock: Post http://%2Fvar%2Frun%2Fdocker.sock/v1.24/containers/create: dial unix /var/run/docker.sock: connect: permission denied.
+See 'docker run --help'.
+ubuntu@ip-172-31-42-161:~/getting-started/app$ sudo docker run -d ubuntu bash -c "shuf -i 1-10000 -n 1 -o /data.txt && tail -f /dev/null"
+Unable to find image 'ubuntu:latest' locally
+latest: Pulling from library/ubuntu
+7b1a6ab2e44d: Pull complete
+Digest: sha256:626ffe58f6e7566e00254b638eb7e0f3b11d4da9675088f4781a50ae288f3322
+Status: Downloaded newer image for ubuntu:latest
+b56e1625f94fcf70d102a701881134848f99ce5d0fe7aede99b36ed132c405ee
+ubuntu@ip-172-31-42-161:~/getting-started/app$ docker ps
+Got permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock: Get http://%2Fvar%2Frun%2Fdocker.sock/v1.24/containers/json: dial unix /var/run/docker.sock: connect: permission denied
+ubuntu@ip-172-31-42-161:~/getting-started/app$ sudo docker ps
+CONTAINER ID   IMAGE                COMMAND                  CREATED              STATUS              PORTS                                       NAMES
+b56e1625f94f   ubuntu               "bash -c 'shuf -i 1-…"   About a minute ago   Up About a minute                                               boring_moore
+29f9e6f867cf   findlove/newdocker   "docker-entrypoint.s…"   2 hours ago          Up 2 hours                                                      beautiful_pasteur
+b40ed0847a37   findlove/newdocker   "docker-entrypoint.s…"   2 hours ago          Up 2 hours          0.0.0.0:3000->3002/tcp, :::3000->3002/tcp   great_meitner
+ubuntu@ip-172-31-42-161:~/getting-started/app$ sudo docker exec b56e1625f94f cat/data.txt
+OCI runtime exec failed: exec failed: container_linux.go:380: starting container process caused: exec: "cat/data.txt": stat cat/data.txt: no such file or directory: unknown
+ubuntu@ip-172-31-42-161:~/getting-started/app$ sudo docker exec b56e1625f94f cat /data.txt
+1300
+ubuntu@ip-172-31-42-161:~/getting-started/app$ sudo docker exec b56e1625f94f cat /data.txt
+1300
+ubuntu@ip-172-31-42-161:~/getting-started/app$ docker run -it ubuntu ls
+docker: Got permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock: Post http://%2Fvar%2Frun%2Fdocker.sock/v1.24/containers/create: dial unix /var/run/docker.sock: connect: permission denied.
+See 'docker run --help'.
+ubuntu@ip-172-31-42-161:~/getting-started/app$ sudo docker run -it ubuntu ls
+bin   dev  home  lib32  libx32  mnt  proc  run   srv  tmp  var
+boot  etc  lib   lib64  media   opt  root  sbin  sys  usr
+ubuntu@ip-172-31-42-161:~/getting-started/app$ sudo docker container ls
+CONTAINER ID   IMAGE                COMMAND                  CREATED         STATUS         PORTS                                       NAMES
+b56e1625f94f   ubuntu               "bash -c 'shuf -i 1-…"   9 minutes ago   Up 9 minutes                                               boring_moore
+29f9e6f867cf   findlove/newdocker   "docker-entrypoint.s…"   2 hours ago     Up 2 hours                                                 beautiful_pasteur
+b40ed0847a37   findlove/newdocker   "docker-entrypoint.s…"   2 hours ago     Up 2 hours     0.0.0.0:3000->3002/tcp, :::3000->3002/tcp   great_meitner
+ubuntu@ip-172-31-42-161:~/getting-started/app$ sudo docker container rm -f b56e1625f94f
+b56e1625f94f
+ubuntu@ip-172-31-42-161:~/getting-started/app$ sudo docker container ls
+CONTAINER ID   IMAGE                COMMAND                  CREATED       STATUS       PORTS                                       NAMES
+29f9e6f867cf   findlove/newdocker   "docker-entrypoint.s…"   2 hours ago   Up 2 hours                                               beautiful_pasteur
+b40ed0847a37   findlove/newdocker   "docker-entrypoint.s…"   2 hours ago   Up 2 hours   0.0.0.0:3000->3002/tcp, :::3000->3002/tcp   great_meitner
+ubuntu@ip-172-31-42-161:~/getting-started/app$ sudo docker volume create todo-db
+todo-db
+ubuntu@ip-172-31-42-161:~/getting-started/app$ sudo docker container ls
+CONTAINER ID   IMAGE                COMMAND                  CREATED       STATUS       PORTS                                       NAMES
+29f9e6f867cf   findlove/newdocker   "docker-entrypoint.s…"   2 hours ago   Up 2 hours                                               beautiful_pasteur
+b40ed0847a37   findlove/newdocker   "docker-entrypoint.s…"   2 hours ago   Up 2 hours   0.0.0.0:3000->3002/tcp, :::3000->3002/tcp   great_meitner
+ubuntu@ip-172-31-42-161:~/getting-started/app$ sudo docker container ls
+CONTAINER ID   IMAGE                COMMAND                  CREATED       STATUS       PORTS                                       NAMES
+29f9e6f867cf   findlove/newdocker   "docker-entrypoint.s…"   2 hours ago   Up 2 hours                                               beautiful_pasteur
+b40ed0847a37   findlove/newdocker   "docker-entrypoint.s…"   2 hours ago   Up 2 hours   0.0.0.0:3000->3002/tcp, :::3000->3002/tcp   great_meitner
+ubuntu@ip-172-31-42-161:~/getting-started/app$ sudo docker volume create todo-db
+todo-db
+ubuntu@ip-172-31-42-161:~/getting-started/app$ sudo docker container ls
+CONTAINER ID   IMAGE                COMMAND                  CREATED       STATUS       PORTS                                       NAMES
+29f9e6f867cf   findlove/newdocker   "docker-entrypoint.s…"   2 hours ago   Up 2 hours                                               beautiful_pasteur
+b40ed0847a37   findlove/newdocker   "docker-entrypoint.s…"   2 hours ago   Up 2 hours   0.0.0.0:3000->3002/tcp, :::3000->3002/tcp   great_meitner
+ubuntu@ip-172-31-42-161:~/getting-started/app$ sudo docker run -dp 3000:3000 -v todo-db:/etc/todos getting-started
+Unable to find image 'getting-started:latest' locally
+docker: Error response from daemon: pull access denied for getting-started, repository does not exist or may require 'docker login': denied: requested access to the resource is denied.
+See 'docker run --help'.
+ubuntu@ip-172-31-42-161:~/getting-started/app$ docker login
+Login with your Docker ID to push and pull images from Docker Hub. If you don't have a Docker ID, head over to https://hub.docker.com to create one.
+Username: findlove
+Password:
+Got permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock: Post http://%2Fvar%2Frun%2Fdocker.sock/v1.24/auth: dial unix /var/run/docker.sock: connect: permission denied
+ubuntu@ip-172-31-42-161:~/getting-started/app$ sudo docker login
+Authenticating with existing credentials...
+WARNING! Your password will be stored unencrypted in /root/.docker/config.json.
+Configure a credential helper to remove this warning. See
+https://docs.docker.com/engine/reference/commandline/login/#credentials-store
+
+Login Succeeded
+ubuntu@ip-172-31-42-161:~/getting-started/app$ sudo docker volume create todo-db
+todo-db
+ubuntu@ip-172-31-42-161:~/getting-started/app$ sudo docker container ls
+CONTAINER ID   IMAGE                COMMAND                  CREATED       STATUS       PORTS                                       NAMES
+29f9e6f867cf   findlove/newdocker   "docker-entrypoint.s…"   2 hours ago   Up 2 hours                                               beautiful_pasteur
+b40ed0847a37   findlove/newdocker   "docker-entrypoint.s…"   2 hours ago   Up 2 hours   0.0.0.0:3000->3002/tcp, :::3000->3002/tcp   great_meitner
+ubuntu@ip-172-31-42-161:~/getting-started/app$ sudo docker run -dp 3000:3000 -v todo-db:/etc/todos getting-started
+Unable to find image 'getting-started:latest' locally
+docker: Error response from daemon: pull access denied for getting-started, repository does not exist or may require 'docker login': denied: requested access to the resource is denied.
+See 'docker run --help'.
+ubuntu@ip-172-31-42-161:~/getting-started/app$ sudo docker login
+Authenticating with existing credentials...
+WARNING! Your password will be stored unencrypted in /root/.docker/config.json.
+Configure a credential helper to remove this warning. See
+https://docs.docker.com/engine/reference/commandline/login/#credentials-store
+
+Login Succeeded
+ubuntu@ip-172-31-42-161:~/getting-started/app$ sudo docker run -dp 3000:3000 -v todo-db:/etc/todos getting-started
+Unable to find image 'getting-started:latest' locally
+docker: Error response from daemon: pull access denied for getting-started, repository does not exist or may require 'docker login': denied: requested access to the resource is denied.
+See 'docker run --help'.
+ubuntu@ip-172-31-42-161:~/getting-started/app$ sudo docker run -dp 3000:3001 -v todo-db:/etc/todos getting-started
+Unable to find image 'getting-started:latest' locally
+docker: Error response from daemon: pull access denied for getting-started, repository does not exist or may require 'docker login': denied: requested access to the resource is denied.
+See 'docker run --help'.
+ubuntu@ip-172-31-42-161:~/getting-started/app$ sudo docker image build -dp 3000:3000 findlove/getting-started
+unknown shorthand flag: 'd' in -dp
+See 'docker image build --help'.
+ubuntu@ip-172-31-42-161:~/getting-started/app$ sudo docker image build -p 3000:3000 findlove/getting-started
+unknown shorthand flag: 'p' in -p
+See 'docker image build --help'.
+ubuntu@ip-172-31-42-161:~/getting-started/app$ sudo docker build -t getting-started .
+Sending build context to Docker daemon  4.641MB
+Step 1/6 : FROM node:12-alpine
+ ---> 106bb94759ad
+Step 2/6 : RUN apk add --no-cache python2 g++ make
+ ---> Using cache
+ ---> 10ecb97da45f
+Step 3/6 : WORKDIR /app
+ ---> Using cache
+ ---> 4d2cfac3893e
+Step 4/6 : COPY . .
+ ---> Using cache
+ ---> b33134d0de45
+Step 5/6 : RUN yarn install --production
+ ---> Using cache
+ ---> a7e1129eef4f
+Step 6/6 : CMD ["node", "src/index.js"]
+ ---> Using cache
+ ---> 414f2b3b45b1
+Successfully built 414f2b3b45b1
+Successfully tagged getting-started:latest
+ubuntu@ip-172-31-42-161:~/getting-started/app$ sudo docker volume create todo-db
+todo-db
+ubuntu@ip-172-31-42-161:~/getting-started/app$ sudo docker run -dp 3000:300 -v todo-db:/etc/todos getting-started
+35e31c5e038afc68436ff80791742f4d8a67808aa578227b5768ba44701f8117
+docker: Error response from daemon: driver failed programming external connectivity on endpoint hungry_thompson (23bd192257939610cd1fdb0de6a5f5c41f766e100c28e043f8c4204955f29d68): Bind for 0.0.0.0:3000 failed: port is already allocated.
+ubuntu@ip-172-31-42-161:~/getting-started/app$ sudo docker run -dp 3000:3005 -v todo-db:/etc/todos getting-started
+b1b054161dc2ec5125e584fc73758e29e3a41f09744cf73742a03837fbbc39ca
+docker: Error response from daemon: driver failed programming external connectivity on endpoint peaceful_williams (0aa87941111ae5ff4f3331c2ce53a3007839a0f77cc84d0a024a8c2148c93363): Bind for 0.0.0.0:3000 failed: port is already allocated.
+ubuntu@ip-172-31-42-161:~/getting-started/app$ sudo docker run -dp 3001:3005 -v todo-db:/etc/todos getting-started
+27e742c905a83fa81a495c36d5e680a06d906f9ec2ae71858333eed9dbbe5a13
+ubuntu@ip-172-31-42-161:~/getting-started/app$ sudo docker container ls
+CONTAINER ID   IMAGE                COMMAND                  CREATED         STATUS         PORTS                                       NAMES
+27e742c905a8   getting-started      "docker-entrypoint.s…"   2 minutes ago   Up 2 minutes   0.0.0.0:3001->3005/tcp, :::3001->3005/tcp   clever_cerf
+29f9e6f867cf   findlove/newdocker   "docker-entrypoint.s…"   2 hours ago     Up 2 hours                                                 beautiful_pasteur
+b40ed0847a37   findlove/newdocker   "docker-entrypoint.s…"   3 hours ago     Up 3 hours     0.0.0.0:3000->3002/tcp, :::3000->3002/tcp   great_meitner
+ubuntu@ip-172-31-42-161:~/getting-started/app$ sudo docker login
+Authenticating with existing credentials...
+WARNING! Your password will be stored unencrypted in /root/.docker/config.json.
+Configure a credential helper to remove this warning. See
+https://docs.docker.com/engine/reference/commandline/login/#credentials-store
+
+Login Succeeded
+ubuntu@ip-172-31-42-161:~/getting-started/app$ sudo docker run -dp 3001:3005 -v todo-db:/etc/todos getting-started
+df5ce88e7a74218faac87a66cfd45fc7d2fd4a65af3aab7cda9d0725ee7fb73d
+docker: Error response from daemon: driver failed programming external connectivity on endpoint upbeat_noyce (7b607aaa896952b03cb460440b21895751e61be10cb48d4fbf0a66dc3d87d21e): Bind for 0.0.0.0:3001 failed: port is already allocated.
+ubuntu@ip-172-31-42-161:~/getting-started/app$ sudo docker run -dp 3002:3006 -v todo-db:/etc/todos getting-started
+6387c24df8dcb1a26ecde1869865af1b922331bd95491df5ced7a202a857297c
+ubuntu@ip-172-31-42-161:~/getting-started/app$ sudo docker container ls
+CONTAINER ID   IMAGE                COMMAND                  CREATED         STATUS         PORTS                                       NAMES
+6387c24df8dc   getting-started      "docker-entrypoint.s…"   3 minutes ago   Up 3 minutes   0.0.0.0:3002->3006/tcp, :::3002->3006/tcp   jolly_visvesvaraya
+27e742c905a8   getting-started      "docker-entrypoint.s…"   8 minutes ago   Up 8 minutes   0.0.0.0:3001->3005/tcp, :::3001->3005/tcp   clever_cerf
+29f9e6f867cf   findlove/newdocker   "docker-entrypoint.s…"   2 hours ago     Up 2 hours                                                 beautiful_pasteur
+b40ed0847a37   findlove/newdocker   "docker-entrypoint.s…"   3 hours ago     Up 3 hours     0.0.0.0:3000->3002/tcp, :::3000->3002/tcp   great_meitner
+ubuntu@ip-172-31-42-161:~/getting-started/app$ sudo docker volume ls
+DRIVER    VOLUME NAME
+local     todo-db
+ubuntu@ip-172-31-42-161:~/getting-started/app$
+Network error: Software caused connection abort
+ubuntu@ip-172-31-42-161:~$ mkdir zing
+ubuntu@ip-172-31-42-161:~$ ls
+ABC       allperm   d                impex           kevin                  perm1          start-tomcat
+ABCimpex  args.sh   galaxyinfor.txt  initialgalaxy   kevin.txt              perm2          temp
+a         b         getting-started  input.sh        kevin_orchestrate.yml  perm3          amar
+abc.sh    bootcamp  hifly            install-tomcat  kevin_playbook         prime.sh       zing
+abc.yml   c         ifelse.sh        jon             main.yml               prime.sh.save
+ubuntu@ip-172-31-42-161:~$ cd zing
+ubuntu@ip-172-31-42-161:~/zing$ sudo adduser chris1
+Adding user `chris1' ...
+Adding new group `chris1' (1014) ...
+Adding new user `chris1' (1013) with group `chris1' ...
+Creating home directory `/home/chris1' ...
+Copying files from `/etc/skel' ...
+New password:
+Retype new password:
+passwd: password updated successfully
+Changing the user information for chris1
+Enter the new value, or press ENTER for the default
+        Full Name []:
+        Room Number []:
+        Work Phone []:
+        Home Phone []:
+        Other []:
+Is the information correct? [Y/n] y
+ubuntu@ip-172-31-42-161:~/zing$ ls
+ubuntu@ip-172-31-42-161:~/zing$ sudo adduser chris2
+Adding user `chris2' ...
+Adding new group `chris2' (1015) ...
+Adding new user `chris2' (1014) with group `chris2' ...
+Creating home directory `/home/chris2' ...
+Copying files from `/etc/skel' ...
+New password:
+Retype new password:
+passwd: password updated successfully
+Changing the user information for chris2
+Enter the new value, or press ENTER for the default
+        Full Name []:
+        Room Number []:
+        Work Phone []:
+        Home Phone []:
+        Other []:
+Is the information correct? [Y/n] y
+ubuntu@ip-172-31-42-161:~/zing$ mkdir usr1
+ubuntu@ip-172-31-42-161:~/zing$ ls
+usr1
+ubuntu@ip-172-31-42-161:~/zing$ cd usr1
+ubuntu@ip-172-31-42-161:~/zing/usr1$ sudo chris1
+sudo: chris1: command not found
+ubuntu@ip-172-31-42-161:~/zing/usr1$ su chris1
+Password:
+chris1@ip-172-31-42-161:/home/ubuntu/zing/usr1$ whoami
+chris1
+chris1@ip-172-31-42-161:/home/ubuntu/zing/usr1$ cd ..
+chris1@ip-172-31-42-161:/home/ubuntu/zing$ mkdir usr2
+mkdir: cannot create directory ‘usr2’: Permission denied
+chris1@ip-172-31-42-161:/home/ubuntu/zing$ exit
+exit
+ubuntu@ip-172-31-42-161:~/zing/usr1$ cd ..
+ubuntu@ip-172-31-42-161:~/zing$ mkdir usr2
+ubuntu@ip-172-31-42-161:~/zing$ ls
+usr1  usr2
+ubuntu@ip-172-31-42-161:~/zing$ cd usr2
+ubuntu@ip-172-31-42-161:~/zing/usr2$ su chris2
+Password:
+chris2@ip-172-31-42-161:/home/ubuntu/zing/usr2$ exit
+exit
+ubuntu@ip-172-31-42-161:~/zing/usr2$ cd ..
+ubuntu@ip-172-31-42-161:~/zing$ cd ..
+ubuntu@ip-172-31-42-161:~$ mkdir initialzing
+ubuntu@ip-172-31-42-161:~$ ls
+ABC       allperm   d                impex           jon                    main.yml  prime.sh.save
+ABCimpex  args.sh   galaxyinfor.txt  initialgalaxy   kevin                  perm1     start-tomcat
+a         b         getting-started  initialzing     kevin.txt              perm2     temp
+abc.sh    bootcamp  hifly            input.sh        kevin_orchestrate.yml  perm3     amar
+abc.yml   c         ifelse.sh        install-tomcat  kevin_playbook         prime.sh  zing
+ubuntu@ip-172-31-42-161:~$ cd initial
+initialgalaxy/ initialzing/
+ubuntu@ip-172-31-42-161:~$ cd initial
+initialgalaxy/ initialzing/
+ubuntu@ip-172-31-42-161:~$ cd initialzing
+ubuntu@ip-172-31-42-161:~/initialzing$ nano
+ubuntu@ip-172-31-42-161:~/initialzing$ ls
+zinginfor.txt
+ubuntu@ip-172-31-42-161:~/initialzing$ cat zinginfor.txt
+rama
+123
+usa
+SE
+ubuntu@ip-172-31-42-161:~/initialzing$ cd ..
+ubuntu@ip-172-31-42-161:~$ cd initialzing
+ubuntu@ip-172-31-42-161:~/initialzing$ ls
+zinginfor.txt
+ubuntu@ip-172-31-42-161:~/initialzing$ mv zinginfor.txt home/ubuntu/
+mv: cannot move 'zinginfor.txt' to 'home/ubuntu/': No such file or directory
+ubuntu@ip-172-31-42-161:~/initialzing$ mv zinginfor.txt /home/ubuntu
+ubuntu@ip-172-31-42-161:~/initialzing$ ls
+ubuntu@ip-172-31-42-161:~/initialzing$ cd ..
+ubuntu@ip-172-31-42-161:~$ ls
+ABC       allperm   d                impex           jon                    main.yml  prime.sh.save  zinginfor.txt
+ABCimpex  args.sh   galaxyinfor.txt  initialgalaxy   kevin                  perm1     start-tomcat
+a         b         getting-started  initialzing     kevin.txt              perm2     temp
+abc.sh    bootcamp  hifly            input.sh        kevin_orchestrate.yml  perm3     amar
+abc.yml   c         ifelse.sh        install-tomcat  kevin_playbook         prime.sh  zing
+ubuntu@ip-172-31-42-161:~$ cp zinginfor.txt initialzing
+ubuntu@ip-172-31-42-161:~$ cd initialzing
+ubuntu@ip-172-31-42-161:~/initialzing$ ls
+zinginfor.txt
+ubuntu@ip-172-31-42-161:~/initialzing$ ^C
+ubuntu@ip-172-31-42-161:~/initialzing$ ^C
+ubuntu@ip-172-31-42-161:~/initialzing$ ls
+zinginfor.txt
+ubuntu@ip-172-31-42-161:~/initialzing$
+Last login: Wed Dec 29 07:50:58 2021 from 106.200.81.65
+ubuntu@ip-172-31-42-161:~$ ls
+ABC       allperm   d                impex           jon                    main.yml  prime.sh.save  zinginfor.txt
+ABCimpex  args.sh   galaxyinfor.txt  initialgalaxy   kevin                  perm1     start-tomcat
+a         b         getting-started  initialzing     kevin.txt              perm2     temp
+abc.sh    bootcamp  hifly            input.sh        kevin_orchestrate.yml  perm3     amar
+abc.yml   c         ifelse.sh        install-tomcat  kevin_playbook         prime.sh  zing
+ubuntu@ip-172-31-42-161:~$ cd getting-started/
+.git/    .github/ app/     docs/
+ubuntu@ip-172-31-42-161:~$ cd getting-started/
+ubuntu@ip-172-31-42-161:~/getting-started$ cd app
+ubuntu@ip-172-31-42-161:~/getting-started/app$ docker network create todo-app
+Got permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock: Post http://%2ar%2Frun%2Fdocker.sock/v1.24/networks/create: dial unix /var/run/docker.sock: connect: permission denied
+ubuntu@ip-172-31-42-161:~/getting-started/app$ sudo docker network create todo-app
+49780735c92ba83957344b19c0886fa95fdfbe0edd2cd6cc4b34203a683d4b1a
+ubuntu@ip-172-31-42-161:~/getting-started/app$  sudo docker run -d --network todo-app --network-alias mysql -v todo-mysqdata:/var/lib/mysql ` -e MYSQL_ROOT_PASSWORD=secret ` -e MYSQL_DATABASE=todos mysql:5.7
+-e: command not found
+f689bd439e0a1045c87b1c2d577af5dbc4e8f668f0bcb1934004a9bb0ced4fe4
+ubuntu@ip-172-31-42-161:~/getting-started/app$ sudo docker ps
+CONTAINER ID   IMAGE            COMMAND                  CREATED       STATUS       PORTS                                     NAMES
+bd444feff9e7   node:12-alpine   "docker-entrypoint.s…"   2 hours ago   Up 2 hours   0.0.0.0:3000->3000/tcp, :::3000->300tcp   keen_yalow
+ubuntu@ip-172-31-42-161:~/getting-started/app$  docker run -d --network todo-app --network-alias mysql -v todo-mysql-dat/var/lib/mysql -e MYSQL_ROOT_PASSWORD=secret -e MYSQL_DATABASE=todos mysql:5.7
+docker: Got permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock: Post hp://%2Fvar%2Frun%2Fdocker.sock/v1.24/containers/create: dial unix /var/run/docker.sock: connect: permission denied.
+See 'docker run --help'.
+ubuntu@ip-172-31-42-161:~/getting-started/app$  sudo docker run -d --network todo-app --network-alias mysql -v todo-mysqdata:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=secret -e MYSQL_DATABASE=todos mysql:5.7
+5d1d82788e3a9387e9161ebf26801b403c7355e025287738c761a5240366c0d7
+ubuntu@ip-172-31-42-161:~/getting-started/app$ docker ps
+Got permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock: Get http://%2Fr%2Frun%2Fdocker.sock/v1.24/containers/json: dial unix /var/run/docker.sock: connect: permission denied
+ubuntu@ip-172-31-42-161:~/getting-started/app$ sudo docker ps
+CONTAINER ID   IMAGE            COMMAND                  CREATED          STATUS          PORTS                                     NAMES
+5d1d82788e3a   mysql:5.7        "docker-entrypoint.s…"   27 seconds ago   Up 25 seconds   3306/tcp, 33060/tcp                       objective_chatterjee
+bd444feff9e7   node:12-alpine   "docker-entrypoint.s…"   2 hours ago      Up 2 hours      0.0.0.0:3000->3000/tcp, :::300>3000/tcp   keen_yalow
+ubuntu@ip-172-31-42-161:~/getting-started/app$  docker exec -it 5d1d82788e3a  mysql -u root -p
+Got permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock: Get http://%2Fr%2Frun%2Fdocker.sock/v1.24/containers/5d1d82788e3a/json: dial unix /var/run/docker.sock: connect: permission denied
+ubuntu@ip-172-31-42-161:~/getting-started/app$ docker exec -it 5d1d82788e3a  mysql -u root -p
+Got permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock: Get http://%2Fr%2Frun%2Fdocker.sock/v1.24/containers/5d1d82788e3a/json: dial unix /var/run/docker.sock: connect: permission denied
+ubuntu@ip-172-31-42-161:~/getting-started/app$ docker exec -it 5d1d82788e3a  mysql -u root -p
+Got permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock: Get http://%2Fr%2Frun%2Fdocker.sock/v1.24/containers/5d1d82788e3a/json: dial unix /var/run/docker.sock: connect: permission denied
+ubuntu@ip-172-31-42-161:~/getting-started/app$ sudo docker exec -it 5d1d82788e3a mysql -u root -p
+Enter password:
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 2
+Server version: 5.7.36 MySQL Community Server (GPL)
+
+Copyright (c) 2000, 2021, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
+| todos              |
++--------------------+
+5 rows in set (0.00 sec)
+
+mysql>
+Network error: Software caused connection abort
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+Session stopped
+    - Press <return> to exit tab
+    - Press R to restart session
+    - Press S to save terminal output to file
+Authenticating with public key "Imported-Openssh-Key"
+    ┌──────────────────────────────────────────────────────────────────────┐
+    │                 • MobaXterm Personal Edition v21.5 •                 │
+    │               (SSH client, X server and network tools)               │
+    │                                                                      │
+    │ ➤ SSH session to ubuntu@65.1.2.196                                   │
+    │   • Direct SSH      :  ✔                                             │
+    │   • SSH compression :  ✔                                             │
+    │   • SSH-browser     :  ✔                                             │
+    │   • X11-forwarding  :  ✔  (remote display is forwarded through SSH)  │
+    │                                                                      │
+    │ ➤ For more info, ctrl+click on help or visit our website.            │
+    └──────────────────────────────────────────────────────────────────────┘
+
+Welcome to Ubuntu 20.04.3 LTS (GNU/Linux 5.11.0-1022-aws x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  System information as of Wed Dec 29 09:54:36 UTC 2021
+
+  System load:                      0.0
+  Usage of /:                       33.8% of 14.48GB
+  Memory usage:                     17%
+  Swap usage:                       0%
+  Processes:                        128
+  Users logged in:                  1
+  IPv4 address for br-49780735c92b: 172.18.0.1
+  IPv4 address for docker0:         172.17.0.1
+  IPv4 address for eth0:            172.31.42.161
+
+ * Ubuntu Pro delivers the most comprehensive open source security and
+   compliance features.
+
+   https://ubuntu.com/aws/pro
+
+16 updates can be applied immediately.
+To see these additional updates run: apt list --upgradable
+
+
+Last login: Wed Dec 29 08:37:46 2021 from 106.200.81.65
+ubuntu@ip-172-31-42-161:~$ ls
+ABC       allperm   d                impex           jon                    main.yml  prime.sh.save  zinginfor.txt
+ABCimpex  args.sh   galaxyinfor.txt  initialgalaxy   kevin                  perm1     start-tomcat
+a         b         getting-started  initialzing     kevin.txt              perm2     temp
+abc.sh    bootcamp  hifly            input.sh        kevin_orchestrate.yml  perm3     amar
+abc.yml   c         ifelse.sh        install-tomcat  kevin_playbook         prime.sh  zing
+ubuntu@ip-172-31-42-161:~$ cd getting-started/\
+>
+ubuntu@ip-172-31-42-161:~/getting-started$ cd app
+ubuntu@ip-172-31-42-161:~/getting-started/app$ sudo docker run -it --network todo-app nicolaka/netshoot
+Unable to find image 'nicolaka/netshoot:latest' locally
+latest: Pulling from nicolaka/netshoot
+97518928ae5f: Already exists
+09706d35e05d: Pull complete
+4996ecc64030: Pull complete
+9a11de879aaa: Pull complete
+44f8e61e69d1: Pull complete
+dcf41a6beeb6: Pull complete
+d4d3a508f57b: Pull complete
+ca86b0e825d1: Pull complete
+7eeba344c2b1: Pull complete
+c52dc2d61c4a: Pull complete
+d04aa1a002c2: Pull complete
+7070cabd1e04: Pull complete
+Digest: sha256:d6942ec583d8e2818f5a5d7a71c303e861a70a11396ad9e9d25b355842e97589
+Status: Downloaded newer image for nicolaka/netshoot:latest
+                    dP            dP                           dP
+                    88            88                           88
+88d888b. .d8888b. d8888P .d8888b. 88d888b. .d8888b. .d8888b. d8888P
+88'  `88 88ooood8   88   Y8ooooo. 88'  `88 88'  `88 88'  `88   88
+88    88 88.  ...   88         88 88    88 88.  .88 88.  .88   88
+dP    dP `88888P'   dP   `88888P' dP    dP `88888P' `88888P'   dP
+
+Welcome to Netshoot! (github.com/nicolaka/netshoot)
+
+
+
+ 8bfe0283b8d4  ~  dig mysql
+
+; <<>> DiG 9.16.22 <<>> mysql
+;; global options: +cmd
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 18611
+;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 0
+
+;; QUESTION SECTION:
+;mysql.                         IN      A
+
+;; ANSWER SECTION:
+mysql.                  600     IN      A       172.18.0.2
+
+;; Query time: 0 msec
+;; SERVER: 127.0.0.11#53(127.0.0.11)
+;; WHEN: Wed Dec 29 09:58:41 UTC 2021
+;; MSG SIZE  rcvd: 44
+
+
+ 8bfe0283b8d4  ~  exit
+ubuntu@ip-172-31-42-161:~/getting-started/app$ sudo docker run -dp 3000:3000 -w /app -v "$(pwd):/app" --network todo-appe MYSQL_HOST=mysql -e MYSQL_USER=root -e MYSQL_PASSWORD=secret -e MYSQL_DB=todos node:12-alpine sh -c "yarn install && yn run dev"
+06e28523cf4d7ff552e2f2718c395c26276d042350862c713f5a323bef4f7a43
+docker: Error response from daemon: driver failed programming external connectivity on endpoint agitated_mcnulty (fe229296483eddf1b4cfdd5215f8969ff52025989b35a31e8c6ae8d49a68c0): Bind for 0.0.0.0:3000 failed: port is already allocated.
+ubuntu@ip-172-31-42-161:~/getting-started/app$ sudo docker run -dp 3001:3000 -w /app -v "$(pwd):/app" --network todo-appe MYSQL_HOST=mysql -e MYSQL_USER=root -e MYSQL_PASSWORD=secret -e MYSQL_DB=todos node:12-alpine sh -c "yarn install && yn run dev"
+1486f603ad70a42c500efac8be64a20b07b037a5effe297d3a00f16bdf9980cd
+ubuntu@ip-172-31-42-161:~/getting-started/app$ sudo docker ps
+CONTAINER ID   IMAGE            COMMAND                  CREATED              STATUS              PORTS                                     NAMES
+1486f603ad70   node:12-alpine   "docker-entrypoint.s…"   About a minute ago   Up About a minute   0.0.0.0:3001->3000/tcp:::3001->3000/tcp   practical_franklin
+5d1d82788e3a   mysql:5.7        "docker-entrypoint.s…"   About an hour ago    Up About an hour    3306/tcp, 33060/tcp                       objective_chatterjee
+bd444feff9e7   node:12-alpine   "docker-entrypoint.s…"   3 hours ago          Up 3 hours          0.0.0.0:3000->3000/tcp:::3000->3000/tcp   keen_yalow
+ubuntu@ip-172-31-42-161:~/getting-started/app$ sudo docker logs 1486f603ad70
+yarn install v1.22.17
+[1/4] Resolving packages...
+warning Resolution field "ansi-regex@5.0.1" is incompatible with requested version "ansi-regex@^2.0.0"
+warning Resolution field "ansi-regex@5.0.1" is incompatible with requested version "ansi-regex@^3.0.0"
+success Already up-to-date.
+Done in 0.60s.
+yarn run v1.22.17
+$ nodemon src/index.js
+[nodemon] 2.0.13
+[nodemon] to restart at any time, enter `rs`
+[nodemon] watching path(s): *.*
+[nodemon] watching extensions: js,mjs,json
+[nodemon] starting `node src/index.js`
+Waiting for mysql:3306.
+Connected!
+Connected to mysql db at host mysql
+Listening on port 3000
+ubuntu@ip-172-31-42-161:~/getting-started/app$ docker exec -it 5d1d82788e3a mysql -p todos
+Got permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock: Get http://%2Fr%2Frun%2Fdocker.sock/v1.24/containers/5d1d82788e3a/json: dial unix /var/run/docker.sock: connect: permission denied
+ubuntu@ip-172-31-42-161:~/getting-started/app$ sudo docker exec -it 5d1d82788e3a mysql -p todos
+Enter password:
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 5
+Server version: 5.7.36 MySQL Community Server (GPL)
+
+Copyright (c) 2000, 2021, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> select * from todo_items;
+Empty set (0.00 sec)
+
+mysql>
+Network error: Software caused connection abort
+Welcome to Ubuntu 20.04.3 LTS (GNU/Linux 5.11.0-1022-aws x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  System information as of Thu Dec 30 06:48:20 UTC 2021
+
+  System load:                      0.0
+  Usage of /:                       38.3% of 14.48GB
+  Memory usage:                     14%
+  Swap usage:                       0%
+  Processes:                        129
+  Users logged in:                  1
+  IPv4 address for br-49780735c92b: 172.18.0.1
+  IPv4 address for br-8ebcce0872f8: 172.19.0.1
+  IPv4 address for docker0:         172.17.0.1
+  IPv4 address for eth0:            172.31.42.161
+
+ * Ubuntu Pro delivers the most comprehensive open source security and
+   compliance features.
+
+   https://ubuntu.com/aws/pro
+
+16 updates can be applied immediately.
+To see these additional updates run: apt list --upgradable
+
+
+Last login: Thu Dec 30 06:43:21 2021 from 27.59.225.70
+ubuntu@ip-172-31-42-161:~$ ls
+ABC       allperm   d                impex           jon                    main.yml  prime.sh.save  zinginfor.txt
+ABCimpex  args.sh   galaxyinfor.txt  initialgalaxy   kevin                  perm1     start-tomcat
+a         b         getting-started  initialzing     kevin.txt              perm2     temp
+abc.sh    bootcamp  hifly            input.sh        kevin_orchestrate.yml  perm3     amar
+abc.yml   c         ifelse.sh        install-tomcat  kevin_playbook         prime.sh  zing
+ubuntu@ip-172-31-42-161:~$ cd getting-started/
+ubuntu@ip-172-31-42-161:~/getting-started$ cd app
+ubuntu@ip-172-31-42-161:~/getting-started/app$ sudo docker run -d -p 80:80 docker/getting-started
+df2c68c76ad2e775747a35fdeac36db15c590bd8d24b451f9487b8bac2e4ef92
+ubuntu@ip-172-31-42-161:~/getting-started/app$ sudo docker container ls
+CONTAINER ID   IMAGE                    COMMAND                  CREATED          STATUS          PORTS                                       NAMES
+df2c68c76ad2   docker/getting-started   "/docker-entrypoint.…"   22 seconds ago   Up 21 seconds   0.0.0.0:80->80/tcp, :::80->80/tcp           angry_curie
+14e99d65f1e0   mysql:5.7                "docker-entrypoint.s…"   21 minutes ago   Up 21 minutes   3306/tcp, 33060/tcp                         app_mysql_1
+e4bf37d2f1da   node:12-alpine           "docker-entrypoint.s…"   21 minutes ago   Up 21 minutes   0.0.0.0:3000->3000/tcp, :::3000->3000/tcp   app_app_1
+ubuntu@ip-172-31-42-161:~/getting-started/app$ sudo docker build -t getting-started .
+Sending build context to Docker daemon  65.22MB
+Step 1/6 : FROM node:12-alpine
+ ---> 106bb94759ad
+Step 2/6 : RUN apk add --no-cache python2 g++ make
+ ---> Using cache
+ ---> 10ecb97da45f
+Step 3/6 : WORKDIR /app
+ ---> Using cache
+ ---> 4d2cfac3893e
+Step 4/6 : COPY . .
+ ---> edbd79be0671
+Step 5/6 : RUN yarn install --production
+ ---> Running in aa9928349165
+yarn install v1.22.17
+[1/4] Resolving packages...
+warning Resolution field "ansi-regex@5.0.1" is incompatible with requested version "ansi-regex@^2.0.0"
+warning Resolution field "ansi-regex@5.0.1" is incompatible with requested version "ansi-regex@^3.0.0"
+[2/4] Fetching packages...
+[3/4] Linking dependencies...
+[4/4] Building fresh packages...
+Done in 19.82s.
+Removing intermediate container aa9928349165
+ ---> 59155c61d006
+Step 6/6 : CMD ["node", "src/index.js"]
+ ---> Running in ec9038af9f81
+Removing intermediate container ec9038af9f81
+ ---> 50fb6ffc7869
+Successfully built 50fb6ffc7869
+Successfully tagged getting-started:latest
+ubuntu@ip-172-31-42-161:~/getting-started/app$ sudo docker run -dp 3000:3000 getting-started
+132f00d1f06d5d0d63bb0fa882b44719c0310cd3c43cc7b88c8a4274a8f7e98d
+docker: Error response from daemon: driver failed programming external connectivity on endpoint dreamy_shamir (24a55dae28f1595aced72f203a26d2e712817c07caf7ea47337b5464243a855d): Bind for 0.0.0.0:3000 failed: port is already allocated.
+ubuntu@ip-172-31-42-161:~/getting-started/app$ sudo docker container ls
+CONTAINER ID   IMAGE                    COMMAND                  CREATED          STATUS          PORTS                                       NAMES
+df2c68c76ad2   docker/getting-started   "/docker-entrypoint.…"   3 minutes ago    Up 3 minutes    0.0.0.0:80->80/tcp, :::80->80/tcp           angry_curie
+14e99d65f1e0   mysql:5.7                "docker-entrypoint.s…"   25 minutes ago   Up 25 minutes   3306/tcp, 33060/tcp                         app_mysql_1
+e4bf37d2f1da   node:12-alpine           "docker-entrypoint.s…"   25 minutes ago   Up 25 minutes   0.0.0.0:3000->3000/tcp, :::3000->3000/tcp   app_app_1
+ubuntu@ip-172-31-42-161:~/getting-started/app$ sudo docker container rm -f e4bf37d2f1da
+e4bf37d2f1da
+ubuntu@ip-172-31-42-161:~/getting-started/app$ sudo docker container ls
+CONTAINER ID   IMAGE                    COMMAND                  CREATED          STATUS          PORTS                               NAMES
+df2c68c76ad2   docker/getting-started   "/docker-entrypoint.…"   6 minutes ago    Up 6 minutes    0.0.0.0:80->80/tcp, :::80->80/tcp   angry_curie
+14e99d65f1e0   mysql:5.7                "docker-entrypoint.s…"   27 minutes ago   Up 27 minutes   3306/tcp, 33060/tcp                 app_mysql_1
+ubuntu@ip-172-31-42-161:~/getting-started/app$ sudo docker run -dp 3000:3000 getting-started
+3d0fd9115744fcd9f08cd98a07bd6dc0461549dc91be13d7032394e190f2457d
+ubuntu@ip-172-31-42-161:~/getting-started/app$ sudo docker ps
+CONTAINER ID   IMAGE                    COMMAND                  CREATED          STATUS          PORTS                                       NAMES
+3d0fd9115744   getting-started          "docker-entrypoint.s…"   52 seconds ago   Up 51 seconds   0.0.0.0:3000->3000/tcp, :::3000->3000/tcp   loving_villani
+df2c68c76ad2   docker/getting-started   "/docker-entrypoint.…"   7 minutes ago    Up 7 minutes    0.0.0.0:80->80/tcp, :::80->80/tcp           angry_curie
+14e99d65f1e0   mysql:5.7                "docker-entrypoint.s…"   28 minutes ago   Up 28 minutes   3306/tcp, 33060/tcp                         app_mysql_1
+ubuntu@ip-172-31-42-161:~/getting-started/app$ sudo docker stop 3d0fd9115744
+3d0fd9115744
+ubuntu@ip-172-31-42-161:~/getting-started/app$ sudo docker container rm -f 3d0fd9115744
+3d0fd9115744
+ubuntu@ip-172-31-42-161:~/getting-started/app$ sudo docker ps
+CONTAINER ID   IMAGE                    COMMAND                  CREATED          STATUS          PORTS                               NAMES
+df2c68c76ad2   docker/getting-started   "/docker-entrypoint.…"   8 minutes ago    Up 8 minutes    0.0.0.0:80->80/tcp, :::80->80/tcp   angry_curie
+14e99d65f1e0   mysql:5.7                "docker-entrypoint.s…"   29 minutes ago   Up 29 minutes   3306/tcp, 33060/tcp                 app_mysql_1
+ubuntu@ip-172-31-42-161:~/getting-started/app$ sudo docker run -dp 3000:3000 getting-started
+7e2081b631eb7f33dfc7a385807a2d26ad4630079503149f54783d000fcd775c
+ubuntu@ip-172-31-42-161:~/getting-started/app$ sudo docker login
+Authenticating with existing credentials...
+WARNING! Your password will be stored unencrypted in /root/.docker/config.json.
+Configure a credential helper to remove this warning. See
+https://docs.docker.com/engine/reference/commandline/login/#credentials-store
+
+Login Succeeded
+ubuntu@ip-172-31-42-161:~/getting-started/app$ sudo docker push findlove/my-file
+Using default tag: latest
+The push refers to repository [docker.io/findlove/my-file]
+An image does not exist locally with the tag: findlove/my-file
+ubuntu@ip-172-31-42-161:~/getting-started/app$ sudo docker image build -d findlove/my-file
+unknown shorthand flag: 'd' in -d
+See 'docker image build --help'.
+ubuntu@ip-172-31-42-161:~/getting-started/app$ sudo docker image build -t findlove/my-file
+"docker image build" requires exactly 1 argument.
+See 'docker image build --help'.
+
+Usage:  docker image build [OPTIONS] PATH | URL | -
+
+Build an image from a Dockerfile
+ubuntu@ip-172-31-42-161:~/getting-started/app$ sudo docker image build -t findlove/my-file .
+Sending build context to Docker daemon  65.22MB
+Step 1/6 : FROM node:12-alpine
+ ---> 106bb94759ad
+Step 2/6 : RUN apk add --no-cache python2 g++ make
+ ---> Using cache
+ ---> 10ecb97da45f
+Step 3/6 : WORKDIR /app
+ ---> Using cache
+ ---> 4d2cfac3893e
+Step 4/6 : COPY . .
+ ---> Using cache
+ ---> edbd79be0671
+Step 5/6 : RUN yarn install --production
+ ---> Using cache
+ ---> 59155c61d006
+Step 6/6 : CMD ["node", "src/index.js"]
+ ---> Using cache
+ ---> 50fb6ffc7869
+Successfully built 50fb6ffc7869
+Successfully tagged findlove/my-file:latest
+ubuntu@ip-172-31-42-161:~/getting-started/app$ sudo docker push findlove/my-file
+Using default tag: latest
+The push refers to repository [docker.io/findlove/my-file]
+4ece53d67555: Pushed
+d4e993bb5e67: Pushed
+c68d61e38754: Mounted from findlove/my-app
+f2adc2efaa9b: Mounted from findlove/my-app
+c99dbbb91c1e: Mounted from findlove/my-app
+743fabfe0b03: Mounted from findlove/my-app
+529f2cda666c: Mounted from findlove/my-app
+1a058d5342cc: Mounted from findlove/my-app
+latest: digest: sha256:96bbb6bb812839f9ddc7f3d93aa4d3139c8c03db71806bdcfb1e53ce0d6828c0 size: 2001
+ubuntu@ip-172-31-42-161:~/getting-started/app$ docker run -d-p 3000:3000 findlove/getting-started
+unknown shorthand flag: '-' in --p
+See 'docker run --help'.
+ubuntu@ip-172-31-42-161:~/getting-started/app$ docker run -d -p 3000:3000 findlove/getting-started
+docker: Got permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock: Post http://%2Fvar%2Frun%2Fdocker.sock/v1.24/containers/create: dial unix /var/run/docker.sock: connect: permission denied.
+See 'docker run --help'.
+ubuntu@ip-172-31-42-161:~/getting-started/app$ sudo docker run -d -p 3000:3000 findlove/getting-started
+Unable to find image 'findlove/getting-started:latest' locally
+docker: Error response from daemon: manifest for findlove/getting-started:latest not found: manifest unknown: manifest unknown.
+See 'docker run --help'.
+ubuntu@ip-172-31-42-161:~/getting-started/app$ sudo docker image build -t findlove/getting-started .
+Sending build context to Docker daemon  65.22MB
+Step 1/6 : FROM node:12-alpine
+ ---> 106bb94759ad
+Step 2/6 : RUN apk add --no-cache python2 g++ make
+ ---> Using cache
+ ---> 10ecb97da45f
+Step 3/6 : WORKDIR /app
+ ---> Using cache
+ ---> 4d2cfac3893e
+Step 4/6 : COPY . .
+ ---> Using cache
+ ---> edbd79be0671
+Step 5/6 : RUN yarn install --production
+ ---> Using cache
+ ---> 59155c61d006
+Step 6/6 : CMD ["node", "src/index.js"]
+ ---> Using cache
+ ---> 50fb6ffc7869
+Successfully built 50fb6ffc7869
+Successfully tagged findlove/getting-started:latest
+ubuntu@ip-172-31-42-161:~/getting-started/app$ sudo docker run -d -p 3000:3000 findlove/getting-started
+134606ba415ef90296b1f56b3689f52b7866d6836b61f0cf5afe69007a794b90
+docker: Error response from daemon: driver failed programming external connectivity on endpoint beautiful_dirac (08349392de246e9ef1d4c365dea19fe33187760b37b46b9015f379b64865bdd6): Bind for 0.0.0.0:3000 failed: port is already allocated.
+ubuntu@ip-172-31-42-161:~/getting-started/app$ sudo docker run -d -p 3001:3000 findlove/getting-started
+c02748ce06051fef7142969835c38b823023bb5dc9a4bc88ce6d85b7e3bcf3bb
+ubuntu@ip-172-31-42-161:~/getting-started/app$ sudo docker run -d ubuntu bash -c "shuf -i 1-10000 -n 1 -o /data.txt && tail -f /dev/null"
+27400a77972c0d86b22d1ad886b40483e28e87c255f1673bed11a63fed8d972f
+ubuntu@ip-172-31-42-161:~/getting-started/app$ sudo docker ps
+CONTAINER ID   IMAGE                      COMMAND                  CREATED          STATUS          PORTS                                       NAMES
+27400a77972c   ubuntu                     "bash -c 'shuf -i 1-…"   43 seconds ago   Up 42 seconds                                               ecstatic_brown
+c02748ce0605   findlove/getting-started   "docker-entrypoint.s…"   2 minutes ago    Up 2 minutes    0.0.0.0:3001->3000/tcp, :::3001->3000/tcp   sleepy_jones
+7e2081b631eb   getting-started            "docker-entrypoint.s…"   9 minutes ago    Up 9 minutes    0.0.0.0:3000->3000/tcp, :::3000->3000/tcp   hungry_diffie
+df2c68c76ad2   docker/getting-started     "/docker-entrypoint.…"   18 minutes ago   Up 18 minutes   0.0.0.0:80->80/tcp, :::80->80/tcp           angry_curie
+14e99d65f1e0   mysql:5.7                  "docker-entrypoint.s…"   39 minutes ago   Up 39 minutes   3306/tcp, 33060/tcp                         app_mysql_1
+ubuntu@ip-172-31-42-161:~/getting-started/app$ sudo docker exec 27400a77972c cat /data.txt
+3227
+ubuntu@ip-172-31-42-161:~/getting-started/app$ sudo docker run -it ubuntu ls
+bin   dev  home  lib32  libx32  mnt  proc  run   srv  tmp  var
+boot  etc  lib   lib64  media   opt  root  sbin  sys  usr
+ubuntu@ip-172-31-42-161:~/getting-started/app$ sudo docker volume create todo-db
+todo-db
+ubuntu@ip-172-31-42-161:~/getting-started/app$ sudo docker run -dp 3000:3000 -v todo-db:/etc/todos getting-started
+04c591a3050cc66ebd1bbe63a5f3aa4b44984b0e063a6db2c22a2762334d119d
+docker: Error response from daemon: driver failed programming external connectivity on endpoint determined_lovelace (dabd07665611e30f174366c8ef32a71c5374ca40f28dd462da2b90cc4e801319): Bind for 0.0.0.0:3000 failed: port is already allocated.
+ubuntu@ip-172-31-42-161:~/getting-started/app$ sudo docker run -dp 3002:3000 -v todo-db:/etc/todos getting-started
+e045c7c20816e88b2238edae5d1f6fb473922d1ebd7184a871eed255002793ff
+ubuntu@ip-172-31-42-161:~/getting-started/app$ sudo docker container ls
+CONTAINER ID   IMAGE                      COMMAND                  CREATED          STATUS          PORTS                                       NAMES
+e045c7c20816   getting-started            "docker-entrypoint.s…"   28 seconds ago   Up 26 seconds   0.0.0.0:3002->3000/tcp, :::3002->3000/tcp   vibrant_noether
+27400a77972c   ubuntu                     "bash -c 'shuf -i 1-…"   4 minutes ago    Up 4 minutes                                                ecstatic_brown
+c02748ce0605   findlove/getting-started   "docker-entrypoint.s…"   6 minutes ago    Up 6 minutes    0.0.0.0:3001->3000/tcp, :::3001->3000/tcp   sleepy_jones
+7e2081b631eb   getting-started            "docker-entrypoint.s…"   13 minutes ago   Up 13 minutes   0.0.0.0:3000->3000/tcp, :::3000->3000/tcp   hungry_diffie
+df2c68c76ad2   docker/getting-started     "/docker-entrypoint.…"   22 minutes ago   Up 22 minutes   0.0.0.0:80->80/tcp, :::80->80/tcp           angry_curie
+14e99d65f1e0   mysql:5.7                  "docker-entrypoint.s…"   43 minutes ago   Up 43 minutes   3306/tcp, 33060/tcp                         app_mysql_1
+ubuntu@ip-172-31-42-161:~/getting-started/app$ sudo docker rm -f e045c7c20816
+e045c7c20816
+ubuntu@ip-172-31-42-161:~/getting-started/app$ sudo docker volume inspect
+"docker volume inspect" requires at least 1 argument.
+See 'docker volume inspect --help'.
+
+Usage:  docker volume inspect [OPTIONS] VOLUME [VOLUME...]
+
+Display detailed information on one or more volumes
+ubuntu@ip-172-31-42-161:~/getting-started/app$ sudo docker volume inspect .
+[
+    {
+        "Driver": "",
+        "Labels": null,
+        "Mountpoint": "",
+        "Name": "",
+        "Options": null,
+        "Scope": ""
+    }
+]
+ubuntu@ip-172-31-42-161:~/getting-started/app$ sudo docker run -dp 3000:3000 -w /app -v "$(pwd):/app" node:12-alpine sh -c "yarn install && yarn run dev"
+ef2b103ad53254162739fd152c7187212a89ff43538349a9da55335483870af7
+docker: Error response from daemon: driver failed programming external connectivity on endpoint compassionate_blackwell (8b4b4a253f6569ba2640b19f4a219b42db5afe12e427dbc237fc6d568c387f7d): Bind for 0.0.0.0:3000 failed: port is already allocated.
+ubuntu@ip-172-31-42-161:~/getting-started/app$ sudo docker run -dp 3002:3000 -w /app -v "$(pwd):/app" node:12-alpine sh -c "yarn install && yarn run dev"
+291647e6785a2edc70039529aa5dccf1d0a796601a98074b4f1f238c1f318533
+ubuntu@ip-172-31-42-161:~/getting-started/app$ sudo docker ps
+CONTAINER ID   IMAGE                      COMMAND                  CREATED          STATUS          PORTS                                       NAMES
+291647e6785a   node:12-alpine             "docker-entrypoint.s…"   20 seconds ago   Up 20 seconds   0.0.0.0:3002->3000/tcp, :::3002->3000/tcp   intelligent_napier
+27400a77972c   ubuntu                     "bash -c 'shuf -i 1-…"   8 minutes ago    Up 8 minutes                                                ecstatic_brown
+c02748ce0605   findlove/getting-started   "docker-entrypoint.s…"   10 minutes ago   Up 10 minutes   0.0.0.0:3001->3000/tcp, :::3001->3000/tcp   sleepy_jones
+7e2081b631eb   getting-started            "docker-entrypoint.s…"   17 minutes ago   Up 17 minutes   0.0.0.0:3000->3000/tcp, :::3000->3000/tcp   hungry_diffie
+df2c68c76ad2   docker/getting-started     "/docker-entrypoint.…"   26 minutes ago   Up 26 minutes   0.0.0.0:80->80/tcp, :::80->80/tcp           angry_curie
+14e99d65f1e0   mysql:5.7                  "docker-entrypoint.s…"   47 minutes ago   Up 47 minutes   3306/tcp, 33060/tcp                         app_mysql_1
+ubuntu@ip-172-31-42-161:~/getting-started/app$ sudo docker logs -f 291647e6785a
+yarn install v1.22.17
+[1/4] Resolving packages...
+warning Resolution field "ansi-regex@5.0.1" is incompatible with requested version "ansi-regex@^2.0.0"
+warning Resolution field "ansi-regex@5.0.1" is incompatible with requested version "ansi-regex@^3.0.0"
+success Already up-to-date.
+Done in 0.80s.
+yarn run v1.22.17
+$ nodemon src/index.js
+[nodemon] 2.0.13
+[nodemon] to restart at any time, enter `rs`
+[nodemon] watching path(s): *.*
+[nodemon] watching extensions: js,mjs,json
+[nodemon] starting `node src/index.js`
+Using sqlite database at /etc/todos/todo.db
+Listening on port 3000
+^C
+ubuntu@ip-172-31-42-161:~/getting-started/app$ sudo docker network create todo-app
+Error response from daemon: network with name todo-app already exists
+ubuntu@ip-172-31-42-161:~/getting-started/app$ sudo docker network create todo-App
+4dddbb337dc99c9694991aa06aea6e6549304c0dfc2dc844e174e8da72e7d1d6
+ubuntu@ip-172-31-42-161:~/getting-started/app$ sudo docker run -d --network todo-app --network-alias mysql -v todo-mysql-data:/var/lib/mysql ` -e MYSQL_ROOT_PASSWORD=secret ` -e MYSQL_DATABASE=todos mysql:5.7
+-e: command not found
+53c349956f207683dbeaeab8507d38209a7c73eb1bda7a9575f60886cec20fe4
+ubuntu@ip-172-31-42-161:~/getting-started/app$ sudo docker run -d --network todo-app --network-alias mysql -v todo-mysql-data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=secret -e MYSQL_DATABASE=todos mysql:5.7
+ed7b40f29d2761ee87235efb76643214c1392385c4831bf6eabbc5901d33c97e
+ubuntu@ip-172-31-42-161:~/getting-started/app$ sudo docker ps
+CONTAINER ID   IMAGE                      COMMAND                  CREATED              STATUS              PORTS                                       NAMES
+ed7b40f29d27   mysql:5.7                  "docker-entrypoint.s…"   39 seconds ago       Up 38 seconds       3306/tcp, 33060/tcp                         pensive_mahavira
+53c349956f20   mysql:5.7                  "docker-entrypoint.s…"   About a minute ago   Up About a minute   3306/tcp, 33060/tcp                         gracious_jennings
+291647e6785a   node:12-alpine             "docker-entrypoint.s…"   7 minutes ago        Up 7 minutes        0.0.0.0:3002->3000/tcp, :::3002->3000/tcp   intelligent_napier
+27400a77972c   ubuntu                     "bash -c 'shuf -i 1-…"   15 minutes ago       Up 15 minutes                                                   ecstatic_brown
+c02748ce0605   findlove/getting-started   "docker-entrypoint.s…"   17 minutes ago       Up 17 minutes       0.0.0.0:3001->3000/tcp, :::3001->3000/tcp   sleepy_jones
+7e2081b631eb   getting-started            "docker-entrypoint.s…"   24 minutes ago       Up 24 minutes       0.0.0.0:3000->3000/tcp, :::3000->3000/tcp   hungry_diffie
+df2c68c76ad2   docker/getting-started     "/docker-entrypoint.…"   33 minutes ago       Up 33 minutes       0.0.0.0:80->80/tcp, :::80->80/tcp           angry_curie
+14e99d65f1e0   mysql:5.7                  "docker-entrypoint.s…"   54 minutes ago       Up 54 minutes       3306/tcp, 33060/tcp                         app_mysql_1
+ubuntu@ip-172-31-42-161:~/getting-started/app$ sudo docker exec ed7b40f29d27 mysql -u root -p
+Enter password: ERROR 2002 (HY000): Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)
+ubuntu@ip-172-31-42-161:~/getting-started/app$ sudo docker exec -it ed7b40f29d27 mysql -u root -p
+Error response from daemon: Container ed7b40f29d2761ee87235efb76643214c1392385c4831bf6eabbc5901d33c97e is not running
+ubuntu@ip-172-31-42-161:~/getting-started/app$ sudo docker ps
+CONTAINER ID   IMAGE                      COMMAND                  CREATED          STATUS          PORTS                                       NAMES
+53c349956f20   mysql:5.7                  "docker-entrypoint.s…"   3 minutes ago    Up 3 minutes    3306/tcp, 33060/tcp                         gracious_jennings
+291647e6785a   node:12-alpine             "docker-entrypoint.s…"   9 minutes ago    Up 9 minutes    0.0.0.0:3002->3000/tcp, :::3002->3000/tcp   intelligent_napier
+27400a77972c   ubuntu                     "bash -c 'shuf -i 1-…"   17 minutes ago   Up 17 minutes                                               ecstatic_brown
+c02748ce0605   findlove/getting-started   "docker-entrypoint.s…"   19 minutes ago   Up 19 minutes   0.0.0.0:3001->3000/tcp, :::3001->3000/tcp   sleepy_jones
+7e2081b631eb   getting-started            "docker-entrypoint.s…"   26 minutes ago   Up 26 minutes   0.0.0.0:3000->3000/tcp, :::3000->3000/tcp   hungry_diffie
+df2c68c76ad2   docker/getting-started     "/docker-entrypoint.…"   35 minutes ago   Up 35 minutes   0.0.0.0:80->80/tcp, :::80->80/tcp           angry_curie
+14e99d65f1e0   mysql:5.7                  "docker-entrypoint.s…"   56 minutes ago   Up 56 minutes   3306/tcp, 33060/tcp                         app_mysql_1
+ubuntu@ip-172-31-42-161:~/getting-started/app$ sudo docker exec -it 53c349956f20  mysql -u root -p
+Enter password:
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 2
+Server version: 5.7.36 MySQL Community Server (GPL)
+
+Copyright (c) 2000, 2021, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
+| todos              |
++--------------------+
+5 rows in set (0.00 sec)
+
+mysql> exit
+Bye
+ubuntu@ip-172-31-42-161:~/getting-started/app$ sudo docker run -it --network todo-app nicolaka/netshoot
+                    dP            dP                           dP
+                    88            88                           88
+88d888b. .d8888b. d8888P .d8888b. 88d888b. .d8888b. .d8888b. d8888P
+88'  `88 88ooood8   88   Y8ooooo. 88'  `88 88'  `88 88'  `88   88
+88    88 88.  ...   88         88 88    88 88.  .88 88.  .88   88
+dP    dP `88888P'   dP   `88888P' dP    dP `88888P' `88888P'   dP
+
+Welcome to Netshoot! (github.com/nicolaka/netshoot)
+
+
+
+ e26b40285a87  ~  dig mysql
+
+; <<>> DiG 9.16.22 <<>> mysql
+;; global options: +cmd
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 7959
+;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 0
+
+;; QUESTION SECTION:
+;mysql.                         IN      A
+
+;; ANSWER SECTION:
+mysql.                  600     IN      A       172.18.0.2
+
+;; Query time: 0 msec
+;; SERVER: 127.0.0.11#53(127.0.0.11)
+;; WHEN: Thu Dec 30 07:30:48 UTC 2021
+;; MSG SIZE  rcvd: 44
+
+
+ e26b40285a87  ~  exit
+ubuntu@ip-172-31-42-161:~/getting-started/app$ sudo docker run -dp 3001:3000 -w /app -v "$(pwd):/app" --network todo-app -e MYSQL_HOST=mysql -e MYSQL_USER=root -e MYSQL_PASSWORD=secret -e MYSQL_DB=todos node:12-alpine sh -c "yarn install && yarn run dev"
+a172c5c0fc7cdac5eaff4ff37b7cd279ab475a4db7330fc029f92dc953a2215c
+docker: Error response from daemon: driver failed programming external connectivity on endpoint crazy_ganguly (5ef70074917b697528fe56e7570f65622b2f64bb8915b35f00f5965b4b5a2b79): Bind for 0.0.0.0:3001 failed: port is already allocated.
+ubuntu@ip-172-31-42-161:~/getting-started/app$ sudo docker run -dp 3002:3000 -w /app -v "$(pwd):/app" --network todo-app -e MYSQL_HOST=mysql -e MYSQL_USER=root -e MYSQL_PASSWORD=secret -e MYSQL_DB=todos node:12-alpine sh -c "yarn install && yarn run dev"
+5afc71323309e48be024b02b438a03335079cbd40ca5eee510880c5d14e9b805
+docker: Error response from daemon: driver failed programming external connectivity on endpoint eloquent_elbakyan (f482b083aa63264332a9da5c03254ae71302a822a11fd3ab6218d1a68af29209): Bind for 0.0.0.0:3002 failed: port is already allocated.
+ubuntu@ip-172-31-42-161:~/getting-started/app$ sudo docker run -dp 3004:3000 -w /app -v "$(pwd):/app" --network todo-app -e MYSQL_HOST=mysql -e MYSQL_USER=root -e MYSQL_PASSWORD=secret -e MYSQL_DB=todos node:12-alpine sh -c "yarn install && yarn run dev"
+f0276d810b42a1fc571f46bf37119b274c4913dc61b9304aa8cfc97172ff2262
+ubuntu@ip-172-31-42-161:~/getting-started/app$ sudo docker ps
+CONTAINER ID   IMAGE                      COMMAND                  CREATED             STATUS             PORTS                                       NAMES
+f0276d810b42   node:12-alpine             "docker-entrypoint.s…"   12 seconds ago      Up 12 seconds      0.0.0.0:3004->3000/tcp, :::3004->3000/tcp   interesting_tereshkova
+53c349956f20   mysql:5.7                  "docker-entrypoint.s…"   8 minutes ago       Up 8 minutes       3306/tcp, 33060/tcp                         gracious_jennings
+291647e6785a   node:12-alpine             "docker-entrypoint.s…"   14 minutes ago      Up 14 minutes      0.0.0.0:3002->3000/tcp, :::3002->3000/tcp   intelligent_napier
+27400a77972c   ubuntu                     "bash -c 'shuf -i 1-…"   22 minutes ago      Up 22 minutes                                                  ecstatic_brown
+c02748ce0605   findlove/getting-started   "docker-entrypoint.s…"   24 minutes ago      Up 24 minutes      0.0.0.0:3001->3000/tcp, :::3001->3000/tcp   sleepy_jones
+7e2081b631eb   getting-started            "docker-entrypoint.s…"   31 minutes ago      Up 31 minutes      0.0.0.0:3000->3000/tcp, :::3000->3000/tcp   hungry_diffie
+df2c68c76ad2   docker/getting-started     "/docker-entrypoint.…"   40 minutes ago      Up 40 minutes      0.0.0.0:80->80/tcp, :::80->80/tcp           angry_curie
+14e99d65f1e0   mysql:5.7                  "docker-entrypoint.s…"   About an hour ago   Up About an hour   3306/tcp, 33060/tcp                         app_mysql_1
+ubuntu@ip-172-31-42-161:~/getting-started/app$ sudo docker logs f0276d810b42
+yarn install v1.22.17
+[1/4] Resolving packages...
+warning Resolution field "ansi-regex@5.0.1" is incompatible with requested version "ansi-regex@^2.0.0"
+warning Resolution field "ansi-regex@5.0.1" is incompatible with requested version "ansi-regex@^3.0.0"
+success Already up-to-date.
+Done in 0.74s.
+yarn run v1.22.17
+$ nodemon src/index.js
+[nodemon] 2.0.13
+[nodemon] to restart at any time, enter `rs`
+[nodemon] watching path(s): *.*
+[nodemon] watching extensions: js,mjs,json
+[nodemon] starting `node src/index.js`
+Waiting for mysql:3306.
+Connected!
+Connected to mysql db at host mysql
+Listening on port 3000
+ubuntu@ip-172-31-42-161:~/getting-started/app$ docker ps
+Got permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock: Get http://%2Fvar%2Frun%2Fdocker.sock/v1.24/containers/json: dial unix /var/run/docker.sock: connect: permission denied
+ubuntu@ip-172-31-42-161:~/getting-started/app$ sudo docker ps
+CONTAINER ID   IMAGE                      COMMAND                  CREATED              STATUS              PORTS                                       NAMES
+f0276d810b42   node:12-alpine             "docker-entrypoint.s…"   About a minute ago   Up About a minute   0.0.0.0:3004->3000/tcp, :::3004->3000/tcp   interesting_tereshkova
+53c349956f20   mysql:5.7                  "docker-entrypoint.s…"   9 minutes ago        Up 9 minutes        3306/tcp, 33060/tcp                         gracious_jennings
+291647e6785a   node:12-alpine             "docker-entrypoint.s…"   15 minutes ago       Up 15 minutes       0.0.0.0:3002->3000/tcp, :::3002->3000/tcp   intelligent_napier
+27400a77972c   ubuntu                     "bash -c 'shuf -i 1-…"   23 minutes ago       Up 23 minutes                                                   ecstatic_brown
+c02748ce0605   findlove/getting-started   "docker-entrypoint.s…"   25 minutes ago       Up 25 minutes       0.0.0.0:3001->3000/tcp, :::3001->3000/tcp   sleepy_jones
+7e2081b631eb   getting-started            "docker-entrypoint.s…"   32 minutes ago       Up 32 minutes       0.0.0.0:3000->3000/tcp, :::3000->3000/tcp   hungry_diffie
+df2c68c76ad2   docker/getting-started     "/docker-entrypoint.…"   41 minutes ago       Up 41 minutes       0.0.0.0:80->80/tcp, :::80->80/tcp           angry_curie
+14e99d65f1e0   mysql:5.7                  "docker-entrypoint.s…"   About an hour ago    Up About an hour    3306/tcp, 33060/tcp                         app_mysql_1
+ubuntu@ip-172-31-42-161:~/getting-started/app$ sudo docker exec -it f0276d810b42 mysql -p todos
+OCI runtime exec failed: exec failed: container_linux.go:380: starting container process caused: exec: "mysql": executable file not found in $PATH: unknown
+ubuntu@ip-172-31-42-161:~/getting-started/app$ sudo docker ps
+CONTAINER ID   IMAGE                      COMMAND                  CREATED             STATUS             PORTS                                       NAMES
+f0276d810b42   node:12-alpine             "docker-entrypoint.s…"   2 minutes ago       Up 2 minutes       0.0.0.0:3004->3000/tcp, :::3004->3000/tcp   interesting_tereshkova
+53c349956f20   mysql:5.7                  "docker-entrypoint.s…"   11 minutes ago      Up 11 minutes      3306/tcp, 33060/tcp                         gracious_jennings
+291647e6785a   node:12-alpine             "docker-entrypoint.s…"   16 minutes ago      Up 16 minutes      0.0.0.0:3002->3000/tcp, :::3002->3000/tcp   intelligent_napier
+27400a77972c   ubuntu                     "bash -c 'shuf -i 1-…"   24 minutes ago      Up 24 minutes                                                  ecstatic_brown
+c02748ce0605   findlove/getting-started   "docker-entrypoint.s…"   26 minutes ago      Up 26 minutes      0.0.0.0:3001->3000/tcp, :::3001->3000/tcp   sleepy_jones
+7e2081b631eb   getting-started            "docker-entrypoint.s…"   33 minutes ago      Up 33 minutes      0.0.0.0:3000->3000/tcp, :::3000->3000/tcp   hungry_diffie
+df2c68c76ad2   docker/getting-started     "/docker-entrypoint.…"   42 minutes ago      Up 42 minutes      0.0.0.0:80->80/tcp, :::80->80/tcp           angry_curie
+14e99d65f1e0   mysql:5.7                  "docker-entrypoint.s…"   About an hour ago   Up About an hour   3306/tcp, 33060/tcp                         app_mysql_1
+ubuntu@ip-172-31-42-161:~/getting-started/app$ sudo docker exec -it 53c349956f20  mysql -p todos
+Enter password:
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 5
+Server version: 5.7.36 MySQL Community Server (GPL)
+
+Copyright (c) 2000, 2021, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> selec * from todo_items;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'selec * from todo_items' at line 1
+mysql> select * from todo_items;
+Empty set (0.00 sec)
+
+mysql> exit
+Bye
+ubuntu@ip-172-31-42-161:~/getting-started/app$ sudo docker-compose --version
+docker-compose version 1.29.2, build 5becea4c
+ubuntu@ip-172-31-42-161:~/getting-started/app$ sudo docker-compose up -d
+app_mysql_1 is up-to-date
+Creating app_app_1 ...
+Creating app_app_1 ... error
+
+ERROR: for app_app_1  Cannot start service app: driver failed programming external connectivity on endpoint app_app_1 (0ab433e37798e3b4638baec425a64daddbf19fcc02a4fc8236a1d8ba38052840): Bind for 0.0.0.0:3000 failed: port is already allocated
+
+ERROR: for app  Cannot start service app: driver failed programming external connectivity on endpoint app_app_1 (0ab433e37798e3b4638baec425a64daddbf19fcc02a4fc8236a1d8ba38052840): Bind for 0.0.0.0:3000 failed: port is already allocated
+ERROR: Encountered errors while bringing up the project.
+ubuntu@ip-172-31-42-161:~/getting-started/app$ sudo docker ps
+CONTAINER ID   IMAGE                      COMMAND                  CREATED             STATUS             PORTS                                       NAMES
+f0276d810b42   node:12-alpine             "docker-entrypoint.s…"   7 minutes ago       Up 7 minutes       0.0.0.0:3004->3000/tcp, :::3004->3000/tcp   interesting_tereshkova
+53c349956f20   mysql:5.7                  "docker-entrypoint.s…"   15 minutes ago      Up 15 minutes      3306/tcp, 33060/tcp                         gracious_jennings
+291647e6785a   node:12-alpine             "docker-entrypoint.s…"   21 minutes ago      Up 21 minutes      0.0.0.0:3002->3000/tcp, :::3002->3000/tcp   intelligent_napier
+27400a77972c   ubuntu                     "bash -c 'shuf -i 1-…"   29 minutes ago      Up 29 minutes                                                  ecstatic_brown
+c02748ce0605   findlove/getting-started   "docker-entrypoint.s…"   31 minutes ago      Up 31 minutes      0.0.0.0:3001->3000/tcp, :::3001->3000/tcp   sleepy_jones
+7e2081b631eb   getting-started            "docker-entrypoint.s…"   38 minutes ago      Up 38 minutes      0.0.0.0:3000->3000/tcp, :::3000->3000/tcp   hungry_diffie
+df2c68c76ad2   docker/getting-started     "/docker-entrypoint.…"   47 minutes ago      Up 47 minutes      0.0.0.0:80->80/tcp, :::80->80/tcp           angry_curie
+14e99d65f1e0   mysql:5.7                  "docker-entrypoint.s…"   About an hour ago   Up About an hour   3306/tcp, 33060/tcp                         app_mysql_1
+ubuntu@ip-172-31-42-161:~/getting-started/app$ sudo docker rm -f f0276d810b42
+f0276d810b42
+ubuntu@ip-172-31-42-161:~/getting-started/app$ sudo docker rm -f 7e2081b631eb
+7e2081b631eb
+ubuntu@ip-172-31-42-161:~/getting-started/app$ sudo docker-compose up -d
+Starting app_app_1 ...
+Starting app_app_1 ... done
+ubuntu@ip-172-31-42-161:~/getting-started/app$ g
+Network error: Software caused connection abort
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+Session stopped
+# This is a basic workflow to help you get started with Actions
+
+name: CI
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the vivek branch
+  push:
+    branches: 
+      - 'master' 
+    tags:
+      - 'v*'
+  pull_request:
+    branches: [ master ]
+         
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - name: Checkout 
+        uses: actions/checkout@v2
+        
+        
+        
+      - name: Login to Docker Hub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKER_HUB_VIVEK }}
+          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+      
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+      
+      - name: Build and push
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: ./Dockerfile
+          push: true
+          tags: ${{ secrets.DOCKER_HUB_VIVEK }}/simplewhale:latest
+          cache-from: type=registry,ref=${{ secrets.DOCKER_HUB_VIVEK }}/simplewhale:buildcache
+          cache-to: type=registry,ref=${{ secrets.DOCKER_HUB_VIVEK }}/simplewhale:buildcache,mode=max
+
+
